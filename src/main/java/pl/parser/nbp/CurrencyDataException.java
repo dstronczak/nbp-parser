@@ -1,4 +1,4 @@
 package pl.parser.nbp;
 
-public class CurrencyDataException {
+public class CurrencyDataException extends Exception {
 }

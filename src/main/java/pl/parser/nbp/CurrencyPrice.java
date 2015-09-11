@@ -22,6 +22,6 @@ public class CurrencyPrice {
 
     @Override
     public String toString() {
-        return "[PURCHASE: " + purchasePrice + ", ASK: " + askPrice +"]";
+        return "[ PURCHASE: " + purchasePrice + ", ASK: " + askPrice +" ]";
     }
 }

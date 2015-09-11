@@ -9,5 +9,7 @@ public enum ExitCode {
         this.code  = code;
     }
 
-    public int getExitCode();
+    public int getExitCode(){
+        return code;
+    }
 }

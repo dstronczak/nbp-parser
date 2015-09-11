@@ -16,12 +16,16 @@ public class CurrencyCalculator {
         this.dateTo = dateTo;
     }
 
-    public void calculate(){
+    public Result calculate() throws CurrencyDataException {
         CurrencyData currencyData = new CurrencyData(currency, dateFrom, dateTo);
         List<CurrencyPrice> currencyPrices = currencyData.fetchData();
-        System.out.println(currencyPrices);
-        System.out.println("Avg purchase price: " + countAveragePuchasePrice(currencyPrices));
-        System.out.println("std dev price: " + countAskPriceStandardDeviation(currencyPrices));
+        float averagePuchasePrice = countAveragePuchasePrice(currencyPrices);
+        float askPriceStandardDeviation = countAskPriceStandardDeviation(currencyPrices);
+        return new Result(averagePuchasePrice, askPriceStandardDeviation);
+
+//        System.out.println(currencyPrices);
+//        System.out.println("Avg purchase price: " + countAveragePuchasePrice(currencyPrices));
+//        System.out.println("std dev price: " + countAskPriceStandardDeviation(currencyPrices));
 
     }
 

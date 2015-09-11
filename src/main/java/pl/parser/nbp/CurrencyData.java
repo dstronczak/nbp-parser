@@ -25,20 +25,15 @@ public class CurrencyData {
         this.dateTo = dateTo;
     }
 
-    public  List<CurrencyPrice> fetchData(){
+    public  List<CurrencyPrice> fetchData() throws CurrencyDataException {
         List<Date> dateList = Utils.getDaysBetweenDates(dateFrom, dateTo);
         try {
             CurrencyDataService currencyDataService = new CurrencyDataService(currency, dateList);
             return currencyDataService.getData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new CurrencyDataException();
         }
 
-        return null;
 
     }
 

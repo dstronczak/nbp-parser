@@ -22,10 +22,6 @@ public class CurrencyDataService {
 
     private static final SimpleDateFormat DIR_DATE_FORMAT = new SimpleDateFormat("yyMMdd");
 
-    private boolean gotData = false;
-
-    List<Float> puchasePrices = new ArrayList<Float>();
-    List<Float> askPrices = new ArrayList<Float>();
 
     public CurrencyDataService(Currency currency, List<Date> dateList) throws IOException {
         this.currency = currency;
@@ -51,9 +47,6 @@ public class CurrencyDataService {
 
         HashSet<String> dir = new HashSet<String>();
 
-
-        System.out.println(path);
-
         URLConnection connection = new URL(path).openConnection();
         InputStream response = connection.getInputStream();
 
@@ -61,12 +54,10 @@ public class CurrencyDataService {
         String line;
 
         while ((line = in.readLine()) != null) {
+            //We are looking for "c" type tables
             if (line.startsWith("c"))
                 dir.add(line.trim());
         }
-
-
-        System.out.println(dir);
 
         return dir;
 
@@ -77,7 +68,6 @@ public class CurrencyDataService {
     }
 
     private String dirFilenameForYear(int year) {
-        System.out.printf("Getting it for: " + year + "\n");
         String dirFileTemplate = "dir%s.txt";
         String yearString = String.valueOf(year);
 
@@ -95,7 +85,14 @@ public class CurrencyDataService {
         List<CurrencyPrice> currencyPrices = new ArrayList<CurrencyPrice>();
         //get Data
         for (Date date : dateList) {
-            String uri = pathForFile(findXmlNameForDate(date));
+            String xmlName = findXmlNameForDate(date);
+
+            if(xmlName.isEmpty()){
+                //Currency data not published - skip
+                continue;
+            }
+
+            String uri = pathForFile(xmlName);
 
             URLConnection connection = new URL(uri).openConnection();
             InputStream response = connection.getInputStream();
