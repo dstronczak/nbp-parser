@@ -3,8 +3,14 @@
 Parser for currency prices, using www.nbp.pl services.
 
 ## Usage
-
+Run a compiled MainClass:
 `java pl.parser.nbp.MainClass <CURRENCY> <START_DATE> <END_DATE>`
+
+  OR
+  
+Build with maven and execute jar:
+`mvn clean package`
+`java -jar currency-parser-1.0.jar <CURRENCY> <START_DATE> <END_DATE>`
 
 ##TODO
   - make http request in multiple Threads (currently running sequentially)
