@@ -4,16 +4,8 @@ public class CurrencyPrice {
     private float purchasePrice;
     private float askPrice;
 
-    public float getPurchasePrice() {
-        return purchasePrice;
-    }
-
     public void setPurchasePrice(float purchasePrice) {
         this.purchasePrice = purchasePrice;
-    }
-
-    public float getAskPrice() {
-        return askPrice;
     }
 
     public void setAskPrice(float askPrice) {
@@ -24,4 +16,16 @@ public class CurrencyPrice {
     public String toString() {
         return "[ PURCHASE: " + purchasePrice + ", ASK: " + askPrice +" ]";
     }
+
+    public float getPrice(PriceType type){
+        if(type == PriceType.PURCHASE){
+            return purchasePrice;
+        } else {
+            return askPrice;
+        }
+    }
+
+
 }
+
+enum PriceType { PURCHASE, ASK }

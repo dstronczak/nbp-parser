@@ -19,45 +19,33 @@ public class CurrencyCalculator {
     public Result calculate() throws CurrencyDataException {
         CurrencyData currencyData = new CurrencyData(currency, dateFrom, dateTo);
         List<CurrencyPrice> currencyPrices = currencyData.fetchData();
+
         float averagePuchasePrice = countAveragePuchasePrice(currencyPrices);
         float askPriceStandardDeviation = countAskPriceStandardDeviation(currencyPrices);
-        return new Result(averagePuchasePrice, askPriceStandardDeviation);
 
-//        System.out.println(currencyPrices);
-//        System.out.println("Avg purchase price: " + countAveragePuchasePrice(currencyPrices));
-//        System.out.println("std dev price: " + countAskPriceStandardDeviation(currencyPrices));
+        return new Result(averagePuchasePrice, askPriceStandardDeviation);
 
     }
 
     public float countAveragePuchasePrice(List<CurrencyPrice> currencyPrices ) {
 
-        List<Float> prices = getPurchasePriceList(currencyPrices);
+        List<Float> prices = getPriceList(currencyPrices, PriceType.PURCHASE);
         return Utils.getMean(prices);
-    }
-
-    private List<Float> getPurchasePriceList(List<CurrencyPrice> currencyPrices) {
-        List<Float> prices = new ArrayList<Float>();
-
-        for(CurrencyPrice price : currencyPrices){
-            prices.add(price.getPurchasePrice());
-        }
-        return prices;
-    }
-
-    private List<Float> getAskPriceList(List<CurrencyPrice> currencyPrices) {
-        List<Float> prices = new ArrayList<Float>();
-
-        for(CurrencyPrice price : currencyPrices){
-            prices.add(price.getAskPrice());
-        }
-        return prices;
     }
 
 
 
     public float countAskPriceStandardDeviation(List<CurrencyPrice> currencyPrices ){
-        List<Float> prices = getAskPriceList(currencyPrices);
+        List<Float> prices = getPriceList(currencyPrices, PriceType.ASK);
         return Utils.getStdDev(prices);
+    }
 
+    private List<Float> getPriceList(List<CurrencyPrice> currencyPrices, PriceType priceType) {
+        List<Float> prices = new ArrayList<Float>();
+
+        for(CurrencyPrice price : currencyPrices){
+            prices.add(price.getPrice(priceType));
+        }
+        return prices;
     }
 }
