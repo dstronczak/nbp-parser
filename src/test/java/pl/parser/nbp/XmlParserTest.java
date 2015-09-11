@@ -137,20 +137,20 @@ public class XmlParserTest {
     @Test
     public void parseCorrectXml() throws IOException, SAXException, ParserConfigurationException {
         CurrencyPrice currencyPrice = XmlParser.parse(correctXMLStream, Currency.USD);
-        assertEquals(currencyPrice.getPurchasePrice(), 2.8210, 0.1);
+        assertEquals(currencyPrice.getPrice(PriceType.PURCHASE), 2.8210, 0.1);
 
         correctXMLStream.reset();
         currencyPrice = XmlParser.parse(correctXMLStream, Currency.EUR);
-        assertEquals(currencyPrice.getAskPrice(), 3.8744, 0.1);
+        assertEquals(currencyPrice.getPrice(PriceType.ASK), 3.8744, 0.1);
 
         correctXMLStream.reset();
         currencyPrice = XmlParser.parse(correctXMLStream, Currency.CHF);
-        assertEquals(currencyPrice.getAskPrice(), 2.3631, 0.1);
+        assertEquals(currencyPrice.getPrice(PriceType.ASK), 2.3631, 0.1);
 
 
         correctXMLStream.reset();
         currencyPrice = XmlParser.parse(correctXMLStream, Currency.GBP);
-        assertEquals(currencyPrice.getPurchasePrice(), 5.5766, 0.1);
+        assertEquals(currencyPrice.getPrice(PriceType.PURCHASE), 5.5766, 0.1);
 
     }
 
@@ -160,12 +160,3 @@ public class XmlParserTest {
 
     }
 }
-
-
-//public class FooTest {
-//    @Test public void readXMLToString() throws Exception {
-//        java.net.URL url = MyClass.class.getResource("test/resources/abc.xml");
-//
-//        String xml = new java.util.Scanner(new File(url),"UTF8").useDelimiter("\\Z").next();
-//    }
-//}

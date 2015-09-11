@@ -1,14 +1,16 @@
 package pl.parser.nbp;
 
-public class CurrencyPrice {
-    private float purchasePrice;
-    private float askPrice;
+enum PriceType {PURCHASE, ASK}
 
-    public void setPurchasePrice(float purchasePrice) {
+public class CurrencyPrice {
+    private double purchasePrice;
+    private double askPrice;
+
+    public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
-    public void setAskPrice(float askPrice) {
+    public void setAskPrice(double askPrice) {
         this.askPrice = askPrice;
     }
 
@@ -17,7 +19,7 @@ public class CurrencyPrice {
         return "[ PURCHASE: " + purchasePrice + ", ASK: " + askPrice +" ]";
     }
 
-    public float getPrice(PriceType type){
+    public double getPrice(PriceType type) {
         if(type == PriceType.PURCHASE){
             return purchasePrice;
         } else {
@@ -27,5 +29,3 @@ public class CurrencyPrice {
 
 
 }
-
-enum PriceType { PURCHASE, ASK }

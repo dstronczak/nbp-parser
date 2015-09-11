@@ -7,8 +7,11 @@ Parser for currency prices, using www.nbp.pl services.
 `java pl.parser.nbp.MainClass <CURRENCY> <START_DATE> <END_DATE>`
 
 ##TODO
-  - async htttp request
-  - code cleanup and refactoring
+  - make http request in multiple Threads (currently running sequentially)
+  - replace number primitive types to Objects (consistency with Collections that them)
+  - possibly create some interfaces and decouple the classes
+  - general code cleanup and refactoring
+  - more unit tests
 
 ## License
 

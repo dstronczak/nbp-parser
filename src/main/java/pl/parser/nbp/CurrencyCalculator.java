@@ -20,28 +20,26 @@ public class CurrencyCalculator {
         CurrencyData currencyData = new CurrencyData(currency, dateFrom, dateTo);
         List<CurrencyPrice> currencyPrices = currencyData.fetchData();
 
-        float averagePuchasePrice = countAveragePuchasePrice(currencyPrices);
-        float askPriceStandardDeviation = countAskPriceStandardDeviation(currencyPrices);
+        double averagePurchasePrice = countAveragePurchasePrice(currencyPrices);
+        double askPriceStandardDeviation = countAskPriceStandardDeviation(currencyPrices);
 
-        return new Result(averagePuchasePrice, askPriceStandardDeviation);
+        return new Result(averagePurchasePrice, askPriceStandardDeviation);
 
     }
 
-    public float countAveragePuchasePrice(List<CurrencyPrice> currencyPrices ) {
-
-        List<Float> prices = getPriceList(currencyPrices, PriceType.PURCHASE);
-        return Utils.getMean(prices);
+    private double countAveragePurchasePrice(List<CurrencyPrice> currencyPrices) {
+        List<Double> purchasePrices = getPriceList(currencyPrices, PriceType.PURCHASE);
+        return Utils.getMean(purchasePrices);
     }
 
 
-
-    public float countAskPriceStandardDeviation(List<CurrencyPrice> currencyPrices ){
-        List<Float> prices = getPriceList(currencyPrices, PriceType.ASK);
-        return Utils.getStdDev(prices);
+    private double countAskPriceStandardDeviation(List<CurrencyPrice> currencyPrices) {
+        List<Double> askPrices = getPriceList(currencyPrices, PriceType.ASK);
+        return Utils.getStdDev(askPrices);
     }
 
-    private List<Float> getPriceList(List<CurrencyPrice> currencyPrices, PriceType priceType) {
-        List<Float> prices = new ArrayList<Float>();
+    private List<Double> getPriceList(List<CurrencyPrice> currencyPrices, PriceType priceType) {
+        List<Double> prices = new ArrayList<Double>();
 
         for(CurrencyPrice price : currencyPrices){
             prices.add(price.getPrice(priceType));

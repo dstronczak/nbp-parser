@@ -1,17 +1,14 @@
 package pl.parser.nbp;
 
-import com.sun.tools.javah.Util;
-
 import java.text.ParseException;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainClass {
 
     //TODO:
-    // watki
-    // refactoring
-    // floats to double
+    // - http requests in multiple threads
+    // - general refactoring
 
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
