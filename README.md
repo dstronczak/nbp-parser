@@ -1,4 +1,4 @@
-# ${1:NBP Parser}
+# NBP Parser
 
 Parser for currency prices, using www.nbp.pl services.
 
